@@ -12,9 +12,6 @@ typedef struct
     float preco;
 }Produtos;
 
-
-
-
 /****************************Funçoes de menu************************/
 void fMenu(); // Menu inicial
 //void fAberturaCaixa();

@@ -27,12 +27,11 @@ float fRetornaTotalMatLimpeza(int produto, int quantidade);
 //PADARIA
 
 //Alimentos e Bebidas
-void fAlimentoseBebidas();
-float fRetornaTotalAlimentos(int produto, int quantidade);
     void fPadaria();
     float fRetornaTotalPadaria(int produto, int quantidade);
 //A&B
-    //implementem vagabundos
+void fAlimentoseBebidas();
+float fRetornaTotalAlimentos(int produto, int quantidade);
 
 /****************************Processamento pagamento****************/
 void fExibeTotalCompraAtual(float iExibeTotaisCompraAtual[]);//exibe menu de pagamento

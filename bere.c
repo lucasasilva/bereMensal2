@@ -188,10 +188,11 @@ void fMenu()
     printf("== 2.   ALIMENTOS E BEBIDAS             ==\n");
     printf("== 3.   PARARIA                         ==\n");
     printf("== 4.   FECHAR A VENDA                  ==\n");
-    printf("== 5.   ENCERRAR O DEADLOCKS - PDV      ==\n");
     printf("==                                      ==\n");
     printf("== 6.   ABERTURA DE CAIXA               ==\n");
     printf("== 7.   FECHAMENTO DE CAIXA             ==\n");
+    printf("==                                      ==\n");
+    printf("== 0.   ENCERRAR O DEADLOCKS - PDV      ==\n");
     printf("==========================================\n");
     printf("== Deadlocks Solucoes Empresariais      ==\n");
     printf("==========================================\n");
@@ -204,15 +205,6 @@ void fMateriaisLimpeza()
     printf("==========================================\n");
     printf("============ ITENS DE LIMPEZA ============\n");
     printf("==========================================\n");
-    printf("== COD     ITEM                  VALOR  ==\n");
-    printf("== 11      DETERGENTE           R$ 1,99 ==\n");
-    printf("== 12      SABAO EM PO (1KG)    R$ 8,99 ==\n");
-    printf("== 13      ESPONJA              R$ 1,50 ==\n");
-    printf("== 14      AMACIANTE (1LT)     R$ 15,00 ==\n");
-    printf("== 15      BUCHA DE PIA");
-    printf("(KIT C/3)R$ 4,99 ==\n");
-    printf("== 16      DESINFETANTE (1LT)   R$ 7,88 ==\n");
-    printf("== 17      SABAO EM BARRA (UN)  R$ 1,00 ==\n");
     printf("== COD     ITEM                VALOR    ==\n");
     printf("== 11      DETERGENTE          R$ 01,99 ==\n");
     printf("== 12      SABAO EM PO (1Kg)   R$ 08,99 ==\n");
@@ -223,7 +215,7 @@ void fMateriaisLimpeza()
     printf("== 16      DESINFETANTE (1Lt)  R$ 7,88 ==\n");
     printf("== 17      SABAO EM BARRA (UN) R$ 1,00 ==\n");
     printf("==                                      ==\n");
-    printf("==  5   VOLTAR AO MENU PRINCIPAL        ==\n");
+    printf("==  6   VOLTAR AO MENU PRINCIPAL        ==\n");
     printf("==========================================\n");
     printf("==========================================\n");
     printf("Informe o Produto ou tecle 5 para retornar\n");
@@ -246,7 +238,7 @@ void fAlimentoseBebidas()
     printf("== 26      SAL (1KG)            R$ 2,00 ==\n");
     printf("== 27      FARINHA DE TRIGO(1KG)R$ 5,00 ==\n");
     printf("==                                      ==\n");
-    printf("==  5   VOLTAR AO MENU PRINCIPAL        ==\n");
+    printf("==  6   VOLTAR AO MENU PRINCIPAL        ==\n");
     printf("==========================================\n");
     printf("==========================================\n");
     printf("Informe o Produto ou tecle 5 para retornar\n");

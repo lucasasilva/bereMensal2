@@ -29,6 +29,10 @@ float fRetornaTotalMatLimpeza(int produto, int quantidade);
 //Alimentos e Bebidas
 void fAlimentoseBebidas();
 float fRetornaTotalAlimentos(int produto, int quantidade);
+    void fPadaria();
+    float fRetornaTotalPadaria(int produto, int quantidade);
+//A&B
+    //implementem vagabundos
 
 /****************************Processamento pagamento****************/
 void fExibeTotalCompraAtual(float iExibeTotaisCompraAtual[]);//exibe menu de pagamento
@@ -66,8 +70,6 @@ void main () {
     float vValorPagar;
     float vDesconto;
     fMenu();
-    //fAberturaCaixa();
-    //fFechaCaixa();
     fscanf(stdin,"%d",&vMenu);
     do
     {
@@ -103,7 +105,29 @@ void main () {
                 getchar();
             } while (vProduto >6);
             break;
-        case 3:/*Seleção de Menu de Padaria*/
+        case 3:
+            do{
+                fPadaria();
+                fscanf(stdin,"%d",&vProduto);
+                if (vProduto <= 6){
+                    break;}
+
+                   if(vProduto == 32){
+                    printf("produto sem estoque\n");
+                    system("pause");
+                    break;
+                }
+
+                printf("Agora informe a quantidade:\n");
+                getchar();
+                fscanf(stdin,"%d",&vQuantidade);
+                vArmazenaTotaisVendas[0] += fRetornaTotalPadaria(vProduto, vQuantidade);
+                vArmazetaTotaisVendaAtual[0] += fRetornaTotalPadaria (vProduto, vQuantidade);
+                vArmazetaTotaisVendaAtual[3] += fRetornaTotalPadaria (vProduto, vQuantidade);//armazena aqui para que seja posssível usar na forma de pagamento, mais tarde
+                getchar();
+
+            } while(vProduto >6);
+
             break;
         case 4:/*Seleção de Menu Pagamentos*/
             do
@@ -193,6 +217,15 @@ void fMateriaisLimpeza()
     printf("(KIT C/3)R$ 4,99 ==\n");
     printf("== 16      DESINFETANTE (1LT)   R$ 7,88 ==\n");
     printf("== 17      SABAO EM BARRA (UN)  R$ 1,00 ==\n");
+    printf("== COD     ITEM                VALOR    ==\n");
+    printf("== 11      DETERGENTE          R$ 01,99 ==\n");
+    printf("== 12      SABAO EM PO (1Kg)   R$ 08,99 ==\n");
+    printf("== 13      ESPONJA             R$ 01,50 ==\n");
+    printf("== 14      AMACIANTE (1Lt)     R$ 15,00 ==\n");
+    printf("== 15      Bucha de pia");
+    printf("           (Kit c/3)           R$ 4,99 ==\n");
+    printf("== 16      DESINFETANTE (1Lt)  R$ 7,88 ==\n");
+    printf("== 17      SABAO EM BARRA (UN) R$ 1,00 ==\n");
     printf("==                                      ==\n");
     printf("==  5   VOLTAR AO MENU PRINCIPAL        ==\n");
     printf("==========================================\n");
@@ -221,8 +254,33 @@ void fAlimentoseBebidas()
     printf("==========================================\n");
     printf("==========================================\n");
     printf("Informe o Produto ou tecle 5 para retornar\n");
+}
+/*----------------- PADDARIA ----------------------------------------------*/
+void fPadaria()
+{
+    system("cls");
+    printf("==========================================\n");
+    printf("============ ITENS DE PADARIA ============\n");
+    printf("==========================================\n");
+    printf("== COD     ITEM                VALOR    ==\n");
+    printf("== 31      Pao de Forma        R$ 09,50 ==\n");
+    printf("== 32   Pao Interal(S/Estoque) R$ 12,50 ==\n");
+    printf("== 33      Pao Frances         R$ 01,50 ==\n");
+    printf("== 34      Sonho               R$ 15,00 ==\n");
+    printf("== 35      Biscoito(kg)        R$ 12,50 ==\n");
+    printf("== 36      Pao doce(Un)        R$ 02,50 ==\n");
+    printf("== 37      Salgado(Un)         R$ 17,50 ==\n");
+    printf("==                                      ==\n");
+    printf("==  6   VOLTAR AO MENU PRINCIPAL        ==\n");
+    printf("==========================================\n");
+    printf("==========================================\n");
+    printf("Informe o Produto ou tecle 6 para retornar\n");
 
 }
+
+
+
+
 
 /*------------------------------------------MATERIAIS DE LIMPEZA, RETORNO DE CALCULO DE QUANTIDADE x VALOR--------------------------------------------------*/
 // O i ANTES DO NOME DAS VARIÁVEIS DE ARGUMENTO É DE "INPUT", ERA PARA SER e, DE "entrada", MAS SÓ PERCEBI TARDE DEMAIS E FIQUEI COM PREGUIÇA DE TROCAR UwU
@@ -236,6 +294,28 @@ float fRetornaTotalMatLimpeza(int iProduto, int iQuantidade){
         if (vMateriaisLimpeza[i].codigo == iProduto)
         {
             vArmazenaTotaisProduto = ((float)iQuantidade * vMateriaisLimpeza[i].preco);
+        }
+    }
+    return vArmazenaTotaisProduto;
+}
+
+// O i ANTES DO NOME DAS VARIÁVEIS DE ARGUMENTO É DE "INPUT", ERA PARA SER e, DE "entrada", MAS SÓ PERCEBI TARDE DEMAIS E FIQUEI COM PREGUIÇA DE TROCAR UwU
+float fRetornaTotalPadaria(int iProduto, int iQuantidade){
+    /*Vetor do "tipo" Produto, iniciado com o código e o preço de cada produto, de cada categoria*/
+    Produtos vPadaria[7]= {{31, 09.50}, {32, 12.50},{33,01.50},{34,15.00},{35,12.50},{36,02.50},{37,17.50}};
+    float vArmazenaTotaisProduto =0;
+    for (int i = 0; i < 7; i++)
+    {   /*Percorre o vetor com a variável i e checa se o código do produto na posição [valor de i]
+          bate com o que o usuário colocou. Se sim, retorna o total comprado, evitando um swit{case()} para cada produto*/
+        if (vPadaria[i].codigo == iProduto)
+        {
+            vArmazenaTotaisProduto = ((float)iQuantidade * vPadaria[i].preco);
+
+            if(vPadaria[i].codigo == 32){
+
+                printf("Voce esta sem estoque sua velha :) /n");
+
+            }
         }
     }
     return vArmazenaTotaisProduto;

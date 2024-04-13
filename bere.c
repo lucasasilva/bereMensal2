@@ -16,22 +16,18 @@ typedef struct
 
 
 /****************************Funçoes de menu************************/
-void fMenu(); // Menu inicial
-//void fAberturaCaixa();
-//void fFechaCaixa();
+void fMenu();// Menu inicial
+void fFechaCaixa();
 
 /****************************Processamento da venda*****************/
 //MATERIAIS DE LIMPEZA
 void fMateriaisLimpeza();
 float fRetornaTotalMatLimpeza(int produto, int quantidade);
 //PADARIA
-
-//Alimentos e Bebidas
     void fPadaria();
     float fRetornaTotalPadaria(int produto, int quantidade);
 //A&B
-void fAlimentoseBebidas();
-float fRetornaTotalAlimentos(int produto, int quantidade);
+    //implementem vagabundos
 
 /****************************Processamento pagamento****************/
 void fExibeTotalCompraAtual(float iExibeTotaisCompraAtual[]);//exibe menu de pagamento
@@ -43,6 +39,7 @@ float fCalculaDescontoMaior(float iTotalCompra, float iPercentDescont);
 
 /*Processa o pagamento, zera variáveis, condiciona totais por forma de pagamento*/
 void fProcessaPagamento(int iFormapag);
+void fFechaCaixa();
 
 void main () {
     /*Armazena os totais por categoria sendo a seguinte lógica:
@@ -63,6 +60,8 @@ void main () {
     vetor[0] deverá ser zerado após cada pagamento*/
     float vArmazenaTotaisFPag[3]={0};
 
+
+
     int vMenu, vFPag;
     int vProduto = 0;
     int vQuantidade = 0;
@@ -74,7 +73,7 @@ void main () {
     {
         switch (vMenu)
         {
-        case 1: /*Seleção de Menu de Materiais de Limpeza*/
+        case 1:
             do{
                 fMateriaisLimpeza();
                 fscanf(stdin,"%d",&vProduto);
@@ -89,20 +88,7 @@ void main () {
                 getchar();
             } while(vProduto >6);
             break;
-        case 2:/*Seleção de Menu de Alimentos e Bebidas*/
-            do{
-                fAlimentoseBebidas();
-                fscanf(stdin,"%d",&vProduto);
-                if (vProduto <= 6)
-                    break;
-                printf("Agora informe a quantidade:\n");
-                getchar();
-                fscanf(stdin,"%d", &vQuantidade);
-                vArmazenaTotaisVendas[2] += fRetornaTotalAlimentos(vProduto, vQuantidade);
-                vArmazetaTotaisVendaAtual[2] += fRetornaTotalAlimentos(vProduto, vQuantidade);
-                vArmazetaTotaisVendaAtual[3] += fRetornaTotalAlimentos(vProduto, vQuantidade);//Armazena para a forma de pagamento.
-                getchar();
-            } while (vProduto >6);
+        case 2:
             break;
         case 3:
             do{
@@ -120,15 +106,16 @@ void main () {
                 printf("Agora informe a quantidade:\n");
                 getchar();
                 fscanf(stdin,"%d",&vQuantidade);
-                vArmazenaTotaisVendas[0] += fRetornaTotalPadaria(vProduto, vQuantidade);
-                vArmazetaTotaisVendaAtual[0] += fRetornaTotalPadaria (vProduto, vQuantidade);
+                vArmazenaTotaisVendas[1] += fRetornaTotalPadaria(vProduto, vQuantidade);
+                vArmazetaTotaisVendaAtual[1] += fRetornaTotalPadaria (vProduto, vQuantidade);
                 vArmazetaTotaisVendaAtual[3] += fRetornaTotalPadaria (vProduto, vQuantidade);//armazena aqui para que seja posssível usar na forma de pagamento, mais tarde
                 getchar();
+
 
             } while(vProduto >6);
 
             break;
-        case 4:/*Seleção de Menu Pagamentos*/
+        case 4:
             do
             {
                 float vPercDesconto =0;
@@ -160,11 +147,18 @@ void main () {
 
             } while (vArmazenaTotaisFPag[0]>0);
             break;
-        case 5: /*Seleção de Menu de Abertura de Caixa*/
-
+        case 5:
 
             break;
-        case 6: /*Seleção de Menu de Fechamento de caixa*/
+        case 6:
+            fFechaCaixa(vArmazenaTotaisVendas);
+            system("pause");
+             if (vProduto <= 6){
+                    break;}
+
+
+
+
             break;
         default:
             fMenu();
@@ -187,14 +181,12 @@ void fMenu()
     printf("============      BERE'S      ============\n");
     printf("==========================================\n");
     printf("\tEscolha uma das opcoes\n");
-    printf("== 1.   MATERIAIS DE LIMPEZA            ==\n");
-    printf("== 2.   ALIMENTOS E BEBIDAS             ==\n");
-    printf("== 3.   PARARIA                         ==\n");
-    printf("== 4.   FECHAR A VENDA                  ==\n");
-    printf("== 5.   ENCERRAR O DEADLOCKS - PDV      ==\n");
-    printf("==                                      ==\n");
-    printf("== 6.   ABERTURA DE CAIXA               ==\n");
-    printf("== 7.   FECHAMENTO DE CAIXA             ==\n");
+    printf("== 1.   Materiais de Limpeza            ==\n");
+    printf("== 2.   Alimentos e Bebidas             ==\n");
+    printf("== 3.   Padaria                         ==\n");
+    printf("== 4.   Fechar venda                    ==\n");
+    printf("== 6.   Fechar Caixa                    ==\n");
+    printf("== 5.   Encerrar o Deadlocks - PDV      ==\n");
     printf("==========================================\n");
     printf("== Deadlocks Solucoes Empresariais      ==\n");
     printf("==========================================\n");
@@ -207,15 +199,6 @@ void fMateriaisLimpeza()
     printf("==========================================\n");
     printf("============ ITENS DE LIMPEZA ============\n");
     printf("==========================================\n");
-    printf("== COD     ITEM                  VALOR  ==\n");
-    printf("== 11      DETERGENTE           R$ 1,99 ==\n");
-    printf("== 12      SABAO EM PO (1KG)    R$ 8,99 ==\n");
-    printf("== 13      ESPONJA              R$ 1,50 ==\n");
-    printf("== 14      AMACIANTE (1LT)     R$ 15,00 ==\n");
-    printf("== 15      BUCHA DE PIA");
-    printf("(KIT C/3)R$ 4,99 ==\n");
-    printf("== 16      DESINFETANTE (1LT)   R$ 7,88 ==\n");
-    printf("== 17      SABAO EM BARRA (UN)  R$ 1,00 ==\n");
     printf("== COD     ITEM                VALOR    ==\n");
     printf("== 11      DETERGENTE          R$ 01,99 ==\n");
     printf("== 12      SABAO EM PO (1Kg)   R$ 08,99 ==\n");
@@ -233,27 +216,6 @@ void fMateriaisLimpeza()
 
 }
 
-/*----------------- Alimentos e Bebidas----------------------------------------------*/
-void fAlimentoseBebidas()
-{
-    system("cls");
-    printf("==========================================\n");
-    printf("============ ITENS DE LIMPEZA ============\n");
-    printf("==========================================\n");
-    printf("== COD     ITEM                  VALOR  ==\n");
-    printf("== 21      CAFE                R$ 19,99 ==\n");
-    printf("== 22      LEITE (CX)           R$ 5,90 ==\n");
-    printf("== 23      ARROZ (1KG)          R$ 4,50 ==\n");
-    printf("== 24      FEIJAO PRETO (1KG)   R$ 8,00 ==\n");
-    printf("== 25      ACUCAR (1KG)         R$ 5,00 ==\n");
-    printf("== 26      SAL (1KG)            R$ 2,00 ==\n");
-    printf("== 27      FARINHA DE TRIGO(1KG)R$ 5,00 ==\n");
-    printf("==                                      ==\n");
-    printf("==  5   VOLTAR AO MENU PRINCIPAL        ==\n");
-    printf("==========================================\n");
-    printf("==========================================\n");
-    printf("Informe o Produto ou tecle 5 para retornar\n");
-}
 /*----------------- PADDARIA ----------------------------------------------*/
 void fPadaria()
 {
@@ -277,15 +239,32 @@ void fPadaria()
 
 }
 
+void fFechaCaixa(float vArmazenaTotais[], float vArmazenaTotaisFPag[]){
+
+    system("cls");
+
+    float TotalVendas;
+    TotalVendas = vArmazenaTotais[0] + vArmazenaTotais[1] + vArmazenaTotais[2] ;
+
+    printf("===================TOTAL DE VENDAS POR CATEGORIA======================\n\n");
+    printf("voce vendeu %.2f em itens de materiais de limpeza \n",vArmazenaTotais[0]);
+    printf("voce vendeu %.2f em itens de padaria\n",vArmazenaTotais[1]);
+    printf("voce vendeu %.2f em itens de A&B\n\n",vArmazenaTotais[2]);
+    printf("===========TOTAL DE VENDAS NO DIA E POR FORMA DE PAGAMENTO============\n\n");
+    printf("voce vendeu um total de %.2f reais hoje \n", TotalVendas);
+    printf("voce vendeu %.2f na forma de pagamento cartao\n",vArmazenaTotaisFPag[2]);
+     printf("voce vendeu %.2f na forma de pagamento dinheiro\n",vArmazenaTotaisFPag[1]);
 
 
 
+}
 
-/*------------------------------------------MATERIAIS DE LIMPEZA, RETORNO DE CALCULO DE QUANTIDADE x VALOR--------------------------------------------------*/
+
+
 // O i ANTES DO NOME DAS VARIÁVEIS DE ARGUMENTO É DE "INPUT", ERA PARA SER e, DE "entrada", MAS SÓ PERCEBI TARDE DEMAIS E FIQUEI COM PREGUIÇA DE TROCAR UwU
 float fRetornaTotalMatLimpeza(int iProduto, int iQuantidade){
     /*Vetor do "tipo" Produto, iniciado com o código e o preço de cada produto, de cada categoria*/
-    Produtos vMateriaisLimpeza[7]= {{11, 1.99}, {12, 08.99},{13, 1.50},{14, 15.00},{15, 4.99},{16, 7.99},{17, 1.00}};
+    Produtos vMateriaisLimpeza[7]= {{11, 1.99}, {12, 08.99},{13,1.50},{14,15.00},{15,4.99},{16,7.99},{17,1.00}};
     float vArmazenaTotaisProduto =0;
     for (int i = 0; i < 7; i++)
     {   /*Percorre o vetor com a variável i e checa se o código do produto na posição [valor de i]
@@ -319,21 +298,6 @@ float fRetornaTotalPadaria(int iProduto, int iQuantidade){
     }
     return vArmazenaTotaisProduto;
 }
-float fRetornaTotalAlimentos(int iProduto, int iQuantidade){
-    /*Vetor do "tipo" Produto, iniciado com o código e o preço de cada produto, de cada categoria*/
-    Produtos vAlimentosBebidas[7]= {{21, 19.99},{22, 5.90},{23, 4.50},{24, 8.00},{25, 5.00},{26, 2.00},{27, 5.00}};
-    float vArmazenaTotaisProduto =0;
-    for (int i=0; i<7; i++)
-    {/*Percorre o vetor com a variável i e checa se o código do produto na posição [valor de i]
-       bate com o que o usuário colocou. Se sim, retorna o total comprado, evitando um swit{case()} para cada produto*/
-        if(vAlimentosBebidas[i].codigo == iProduto)
-        {
-            vArmazenaTotaisProduto = ((float)iQuantidade * vAlimentosBebidas[i].preco);
-        }
-    }
-    return vArmazenaTotaisProduto;
-}
-
 
 
 /*----------------- FORMA DE PAGAMENTO-----------------------------------------------*/
@@ -348,7 +312,7 @@ float fCalculaDescontoMenor(float iTotalCompra){
     }
     return 0;
 }
-/* Como a bere agora inventou de querer ser --||PRIME||-- no desconto, alternativa mais fácil é quebrar o desconto em duas partes*/
+/* Como a bere agora inventou de querer ser prime no desconto, alternativa mais fácil é quebrar o desconto em duas partes*/
 float fCalculaDescontoMaior (float iTotalCompra, float iPercentDescont){
     return iTotalCompra *(iPercentDescont/100);
 }

@@ -183,7 +183,7 @@ void fMenu()
     printf("==========================================\n");
     printf("============      BERE'S      ============\n");
     printf("==========================================\n");
-    printf("\tEscolha uma das opcoes\n");
+    printf("==        Escolha uma das opcoes        ==\n");
     printf("== 1.   MATERIAIS DE LIMPEZA            ==\n");
     printf("== 2.   ALIMENTOS E BEBIDAS             ==\n");
     printf("== 3.   PARARIA                         ==\n");
@@ -202,22 +202,21 @@ void fMenu()
 void fMateriaisLimpeza()
 {
     system("cls");
-    printf("==========================================\n");
-    printf("============ ITENS DE LIMPEZA ============\n");
-    printf("==========================================\n");
-    printf("== COD     ITEM                VALOR    ==\n");
-    printf("== 11      DETERGENTE          R$ 01,99 ==\n");
-    printf("== 12      SABAO EM PO (1Kg)   R$ 08,99 ==\n");
-    printf("== 13      ESPONJA             R$ 01,50 ==\n");
-    printf("== 14      AMACIANTE (1Lt)     R$ 15,00 ==\n");
-    printf("== 15      Bucha de pia");
-    printf("           (Kit c/3)           R$ 4,99 ==\n");
-    printf("== 16      DESINFETANTE (1Lt)  R$ 7,88 ==\n");
-    printf("== 17      SABAO EM BARRA (UN) R$ 1,00 ==\n");
-    printf("==                                      ==\n");
-    printf("==  6   VOLTAR AO MENU PRINCIPAL        ==\n");
-    printf("==========================================\n");
-    printf("==========================================\n");
+    printf("=============================================\n");
+    printf("============= ITENS DE LIMPEZA ==============\n");
+    printf("=============================================\n");
+    printf("== COD     ITEM                   VALOR    ==\n");
+    printf("== 11      DETERGENTE             R$ 01,99 ==\n");
+    printf("== 12      SABAO EM PO (1Kg)      R$ 08,99 ==\n");
+    printf("== 13      ESPONJA                R$ 01,50 ==\n");
+    printf("== 14      AMACIANTE (1Lt)        R$ 15,00 ==\n");
+    printf("== 15      Bucha de pia (Kit c/3) R$ 04,99 ==\n");
+    printf("== 16      DESINFETANTE (1Lt)     R$ 07,88 ==\n");
+    printf("== 17      SABAO EM BARRA (UN)    R$ 01,00 ==\n");
+    printf("==                                         ==\n");
+    printf("==  6   VOLTAR AO MENU PRINCIPAL           ==\n");
+    printf("=============================================\n");
+    printf("=============================================\n");
     printf("Informe o Produto ou tecle 5 para retornar\n");
 
 }

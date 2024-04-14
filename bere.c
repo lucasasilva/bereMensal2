@@ -39,7 +39,7 @@ float fCalculaDescontoMenor(float iTotalCompra);
 float fCalculaDescontoMaior(float iTotalCompra, float iPercentDescont);
 
 /*Processa o pagamento, zera variáveis, condiciona totais por forma de pagamento*/
-void fProcessaPagamento(int iFormapag);
+void fProcessaPagamento (int vFpag, float vValorTotalCompra[],float vValorPagar,float vDesconto,  float vArmazenaTotalPago[] );
 
 void main () {
     /*Armazena os totais por categoria sendo a seguinte lógica:
@@ -138,20 +138,44 @@ void main () {
                 fscanf(stdin,"%f",&vValorPagar);
                 getchar();
                 //so lê o desconto se for maior que 200 e o valor a pagar for maior que o total a receber
-                if (vFPag == 1 && vValorPagar >=vArmazetaTotaisVendaAtual[3]&& vArmazetaTotaisVendaAtual[3]>=200)
+                if (vFPag == 1 && vArmazetaTotaisVendaAtual[3]>=200)
                 {
                     do{
                         printf("Informe o total de desconto que o cliente tem direito ser extorquido nesta mercearia super faturada\n");
                         fscanf(stdin,"%f",&vPercDesconto);
                     }while (vPercDesconto <=10);
-                    //descontar o valor pago do vetor
-                    //zerar variáveis locais para iniciar nova venda
-                    //exibir troco (caso valor pago > que valor a receber)
+                    if (vValorPagar> vArmazetaTotaisVendaAtual[3] )
+                    {
+                       printf("Valor do troco eh: %.2f\n",(vValorPagar- vArmazetaTotaisVendaAtual[3])); 
+                    }
+                    
+                    fProcessaPagamento(1,&vArmazetaTotaisVendaAtual[3], vValorPagar, fCalculaDescontoMaior(vArmazetaTotaisVendaAtual[3], vPercDesconto), &vArmazenaTotaisFPag[0]);
 
-                } else if (vFPag ==1 && vValorPagar >=vArmazetaTotaisVendaAtual[3]&& vArmazetaTotaisVendaAtual[3]<200)
+                } else if (vFPag ==1 && vArmazetaTotaisVendaAtual[3]<200)
                 {
-                   //desconto de 5 ou 10%
+                   if (vValorPagar> vArmazetaTotaisVendaAtual[3] )
+                    {
+                       printf("Valor do troco eh: %.2f\n",(vValorPagar- vArmazetaTotaisVendaAtual[3])); 
+                    }
+                    
+                    fProcessaPagamento(1,&vArmazetaTotaisVendaAtual[3], vValorPagar, fCalculaDescontoMenor(vArmazetaTotaisVendaAtual[3]), &vArmazenaTotaisFPag[0]);
+
                 }
+                else if (vFPag ==2)
+                {
+                    char vCartaoAutorizado;
+                    do
+                    {
+                        printf("Cartao foi autorizado?\n");
+                        fscanf(stdin,"%c",&vCartaoAutorizado); 
+                    } while (vCartaoAutorizado != 'S'|| vCartaoAutorizado);                    
+                    if (toupper(vCartaoAutorizado)=='N')
+                    {
+                        /* code */
+                    }
+                     
+                }
+                
 
 
 
@@ -371,15 +395,55 @@ void fExibeTotalCompraAtual(float iExibeTotaisCompraAtual[]){
     printf("6 - para retornar ao menu principal\n");
 }
 
-float fProcessaPagamentoDinheiro (float vValorTotalCompra[],float vValorPagar,  float vDesconto){
-    vValorTotalCompra[0] -=(vValorPagar - vDesconto);
-    if (vValorTotalCompra <0)
+void fProcessaPagamento (int vFpag, float vValorTotalCompra[],float vValorPagar,float vDesconto,  float vArmazenaTotalPago[] ){
+    
+    if (vFpag ==1)//pagamento em dinheiro
     {
-        return 0;
+        
+        if (vValorTotalCompra[3]<vValorPagar)
+        {
+            vValorTotalCompra[0] =0;
+            vValorTotalCompra[1] =0;
+            vValorTotalCompra[2] =0;
+            vValorTotalCompra[3] =0;
+            /*Armazena pagamento*/
+            vArmazenaTotalPago[0] += (vValorTotalCompra[3]-vDesconto);
+        }
+        else
+        {
+            vValorTotalCompra[0]-= vValorPagar;
+            vValorTotalCompra[1]-= vValorPagar;
+            vValorTotalCompra[2]-= vValorPagar;
+            vValorTotalCompra[3]-= vValorPagar;
+            /*Forma de pagamento*/
+            vArmazenaTotalPago[0] += vValorPagar;
+
+        }
+    } else if (vFpag ==2)//pagamento em cartão
+    {
+        if (vValorTotalCompra[3]<vValorPagar)
+        {
+            vValorTotalCompra[0] =0;
+            vValorTotalCompra[1] =0;
+            vValorTotalCompra[2] =0;
+            vValorTotalCompra[3] =0;
+            /*Armazena pagamento*/
+            vArmazenaTotalPago[1] += (vValorTotalCompra[3]-vDesconto);
+        }
+        else
+        {
+            vValorTotalCompra[0]-= vValorPagar;
+            vValorTotalCompra[1]-= vValorPagar;
+            vValorTotalCompra[2]-= vValorPagar;
+            vValorTotalCompra[3]-= vValorPagar;
+            /*Forma de pagamento*/
+            vArmazenaTotalPago[1] += vValorPagar;
+
+        }
     }
-    else{
-        return vValorTotalCompra[0];
-    }
+    
+    
+        
 
 
 }
